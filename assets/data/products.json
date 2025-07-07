@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "گوشی هوشمند A1",
+    "price": 12990000,
+    "image": "https://picsum.photos/seed/a1/400/400",
+    "description": "گوشی هوشمند با نمایشگر AMOLED، حافظه 128GB و دوربین 48 مگاپیکسل"
+  },
+  {
+    "id": 2,
+    "name": "هدفون بی‌سیم X100",
+    "price": 2490000,
+    "image": "https://picsum.photos/seed/a2/400/400",
+    "description": "هدفون دورگوشی با حذف نویز فعال و باتری 30 ساعته"
+  },
+  {
+    "id": 3,
+    "name": "لپ‌تاپ Z Pro 15",
+    "price": 44990000,
+    "image": "https://picsum.photos/seed/a3/400/400",
+    "description": "لپ‌تاپ 15 اینچ با پردازنده Core i7 و کارت گرافیک RTX 3060"
+  }
+]

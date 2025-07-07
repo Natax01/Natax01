@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>محصولات</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="font-[Vazirmatn] bg-gray-100 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="Index.html" class="text-xl font-bold">فروشگاه</a>
+      <ul class="flex space-x-4 space-x-reverse">
+        <li><a href="products.html" class="text-blue-600">محصولات</a></li>
+        <li><a href="cart.html" class="hover:text-blue-600 flex items-center"><span>سبد خرید</span> <span id="cart-count" class="ml-1 text-sm bg-blue-600 text-white rounded-full px-2"></span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-semibold mb-6">لیست محصولات</h1>
+    <div id="product-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    async function loadProducts() {
+      const res = await fetch('assets/data/products.json');
+      const products = await res.json();
+      const grid = document.getElementById('product-grid');
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'bg-white p-4 rounded shadow hover:shadow-md transition flex flex-col';
+        card.innerHTML = `
+          <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" class="mb-4 rounded"></a>
+          <h2 class="text-lg font-semibold mb-2">${p.name}</h2>
+          <p class="mb-4">${p.price.toLocaleString('fa-IR')} تومان</p>
+          <button data-id="${p.id}" class="mt-auto bg-blue-600 text-white py-2 rounded hover:bg-blue-700">افزودن به سبد</button>
+        `;
+        grid.appendChild(card);
+      });
+      // attach listeners
+      grid.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+          const id = Number(e.target.getAttribute('data-id'));
+          const product = products.find(pr => pr.id === id);
+          addToCart(product);
+          alert('محصول به سبد اضافه شد');
+        }
+      });
+    }
+    loadProducts();
+    updateCartCount();
+  </script>
+</body>
+</html>

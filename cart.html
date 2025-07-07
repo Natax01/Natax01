@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سبد خرید</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="font-[Vazirmatn] bg-gray-100 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="Index.html" class="text-xl font-bold">فروشگاه</a>
+      <ul class="flex space-x-4 space-x-reverse">
+        <li><a href="products.html" class="hover:text-blue-600">محصولات</a></li>
+        <li><a href="cart.html" class="text-blue-600 flex items-center"><span>سبد خرید</span> <span id="cart-count" class="ml-1 text-sm bg-blue-600 text-white rounded-full px-2"></span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-semibold mb-6">سبد خرید شما</h1>
+    <div id="cart-items" class="space-y-4"></div>
+    <div id="cart-summary" class="mt-8"></div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    function renderCart() {
+      const items = getCart();
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      if (!items.length) {
+        container.innerHTML = '<p>سبد خرید خالی است.</p>';
+        document.getElementById('cart-summary').innerHTML = '';
+        updateCartCount();
+        return;
+      }
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'bg-white p-4 rounded shadow flex items-center gap-4';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-20 h-20 rounded" />
+          <div class="flex-1">
+            <h2 class="font-semibold">${item.name}</h2>
+            <p>${item.price.toLocaleString('fa-IR')} تومان × ${item.qty}</p>
+          </div>
+          <button data-id="${item.id}" class="bg-red-600 text-white px-3 py-1 rounded">حذف</button>
+        `;
+        container.appendChild(div);
+      });
+      container.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+          const id = Number(e.target.getAttribute('data-id'));
+          removeFromCart(id);
+          renderCart();
+        }
+      });
+      const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+      document.getElementById('cart-summary').innerHTML = `
+        <p class="text-xl font-semibold">مجموع قابل پرداخت: ${total.toLocaleString('fa-IR')} تومان</p>
+        <button class="mt-4 bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700" onclick="alert('در نسخه نمایشی امکان پرداخت وجود ندارد')">ادامه فرایند پرداخت</button>
+      `;
+      updateCartCount();
+    }
+    renderCart();
+  </script>
+</body>
+</html>

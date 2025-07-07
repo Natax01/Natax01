@@ -1,1 +1,72 @@
-xjjx
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فروشگاه آنلاین</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            vazir: ["Vazirmatn", "sans-serif"],
+          },
+        },
+      },
+      plugins: [],
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="font-vazir bg-gray-100 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="Index.html" class="text-xl font-bold">فروشگاه</a>
+      <ul class="flex space-x-4 space-x-reverse">
+        <li><a href="products.html" class="hover:text-blue-600">محصولات</a></li>
+        <li><a href="cart.html" class="hover:text-blue-600 flex items-center"><span>سبد خرید</span> <span id="cart-count" class="ml-1 text-sm bg-blue-600 text-white rounded-full px-2"></span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-blue-50 py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">به فروشگاه آنلاین ما خوش آمدید</h1>
+      <p class="text-lg mb-6">تجربه خرید آسان، سریع و مطمئن</p>
+      <a href="products.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">مشاهده محصولات</a>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="container mx-auto px-4 py-12 grid md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-2">ارسال سریع</h2>
+      <p>ارسال سفارش‌ها در کمترین زمان ممکن به سراسر کشور</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-2">پرداخت امن</h2>
+      <p>اتصال به درگاه‌های معتبر با پروتکل‌های رمزنگاری‌شده</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-2">پشتیبانی ۲۴ ساعته</h2>
+      <p>در هر ساعت از شبانه‌روز پاسخگوی شما هستیم</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-6 mt-12">
+    <div class="container mx-auto px-4 text-center text-gray-300">
+      © <span id="year"></span> تمامی حقوق محفوظ است.
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateCartCount();
+  </script>
+</body>
+</html>
